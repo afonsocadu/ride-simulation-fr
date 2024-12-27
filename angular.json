@@ -106,5 +106,10 @@
   },
   "cli": {
     "analytics": "0a64aa6a-c488-451b-999d-d69463828772"
-  }
+  },
+  "styles": [
+  "src/styles.css",
+  "node_modules/leaflet/dist/leaflet.css"
+]
+
 }
