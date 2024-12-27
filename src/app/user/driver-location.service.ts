@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, interval } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +8,11 @@ export class DriverLocationService {
 
   private driverLocations: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   private drivers = [
-    { id: 1, lat: -23.55052, lng: -46.633308 },
-    { id: 2, lat: -23.55152, lng: -46.632308 },
-    { id: 3, lat: -23.54952, lng: -46.634308 }
+    { id: 1, lat: 41.2038, lng: -8.6108 },
+    { id: 2, lat: 41.2032, lng: -8.6115 },
+    { id: 3, lat: 41.2040, lng: -8.6120 }
   ];
+  
 
   constructor() {
     interval(3000).subscribe(() => this.updateLocations());
@@ -27,10 +27,9 @@ export class DriverLocationService {
       };
     });
 
-    this.driverLocations.next(this.drivers); // Atualiza a emissão para os observadores
+    this.driverLocations.next(this.drivers); 
   }
 
-  // Método para o componente se inscrever e receber as localizações
   getDriverLocations(): Observable<any[]> {
     return this.driverLocations.asObservable();
   }
