@@ -30,31 +30,34 @@ export class UserMapComponent implements OnInit, OnDestroy {
   }
 
   private initMap(): void {
+    //Define map
+    this.map = L.map('map', {
+      center: [41.2036, -8.6110], 
+      zoom: 16,
+    });
 
-    const DefaultIcon = L.icon({
+    //Config marker
+    const userIcon = L.icon({
       iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
       shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
       iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-      iconSize: [25, 41], // Tamanho do ícone
-      iconAnchor: [12, 41], // Ponto de ancoragem
+      iconSize: [25, 41],
+      iconAnchor: [12, 41], 
       popupAnchor: [1, -34],
       shadowSize: [41, 41]
     });
     
-    // Defina o ícone padrão
-    L.Marker.prototype.options.icon = DefaultIcon;
-    
-    this.map = L.map('map', {
-      center: [41.2036, -8.6110], 
-      zoom: 16,
-      
-    });
-    
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-  }).addTo(this.map);
+    //L.Marker.prototype.options.icon = DefaultIcon;
+    const marker = L.marker([41.2036, -8.6110], { icon: userIcon, draggable: true });
+    const popUp = marker.bindPopup('You are here').addTo(this.map);
   
+    //Define google street configuration
+    const googleStreets = L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}',{
+      maxZoom: 20,
+      subdomains:['mt0','mt1','mt2','mt3']
+    });
+
+    googleStreets.addTo(this.map);
   
   }
 

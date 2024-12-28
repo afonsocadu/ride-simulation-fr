@@ -15,7 +15,7 @@ export class DriverLocationService {
   
 
   constructor() {
-    interval(3000).subscribe(() => this.updateLocations());
+    //interval(3000).subscribe(() => this.updateLocations());
   }
 
   private updateLocations(): void {
