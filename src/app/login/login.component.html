@@ -1,0 +1,26 @@
+<body>
+<div class="main">
+  <h2>Login</h2>
+  <form (ngSubmit)="onSubmit()">
+    <label for="email">Email:</label>
+    <input type="email" id="email" [(ngModel)]="_email" name="email" required>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" [(ngModel)]="_password" name="password" required>
+    <br>
+    <div *ngIf="_isCreatingUser">
+      <label for="password-confirmation">Confirm Password:</label>
+      <input type="password" id="password-confirmation" [(ngModel)]="_password_confirmation" name="password-confirmation" required>
+    </div>
+
+    <br>
+    <div class="button-group">
+      <button type="submit" class="button-pattern">{{_isCreatingUser ? 'Create Account' : 'Login' }}</button>
+    </div>
+  </form>
+</div>
+<div class="other-options">
+  <button type="button" class="button-recruiter" (click)="_logInRecruiter()">Log in as a recruiter</button>
+  <button type="button" class="button-pattern" (click)="_toggleForm()">{{ _isCreatingUser ? 'Switch to login' : 'Create Account' }}</button>
+</div>
+</body>
