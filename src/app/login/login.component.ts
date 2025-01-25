@@ -18,24 +18,7 @@ export class LoginComponent implements OnInit{
   constructor(private _authService: AuthService,  private _router: Router) {}
 
   public ngOnInit(): void {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        function(position) {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
-          console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-        },
-        function(error) {
-          if (error.code === 1) {
-            alert('Você negou o acesso à sua localização. Para continuar, permita o acesso.');
-          } else {
-            console.error('Erro ao obter localização:', error.message);
-          }
-        }
-      );
-    } else {
-      console.log('Geolocalização não é suportada neste navegador.');
-    }
+
   }
 
   /**
