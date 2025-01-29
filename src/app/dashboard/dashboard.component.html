@@ -1,3 +1,11 @@
-<div class="map-container">
+
+<div class="map-container" *ngIf="_showMap">
   <div id="map" class="map-frame"></div>
+</div>
+
+<h1>Where are you at?</h1>
+<div style="position: absolute; top: 10px; left: 10px; z-index: 1000;">
+  <input type="text" placeholder="Digite a sua localização atual" [(ngModel)]="_currentLocation" style="padding: 5px; width: 200px;" />
+  <input type="text" placeholder="Digite a longitude" [(ngModel)]="_destinationLocation" style="padding: 5px; width: 200px;" />
+  <button (click)="_onSubmit()" style="padding: 5px;">Submit</button>
 </div>
