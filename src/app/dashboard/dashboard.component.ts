@@ -3,7 +3,6 @@ import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import 'leaflet-control-geocoder';
 import axios from 'axios';
-
 declare module 'leaflet' { namespace Control { namespace Geocoder {const nominatim: (options?: any) => any;}}}
 
 @Component({
@@ -49,13 +48,12 @@ export class DashboardComponent {
 
   protected _requestDriver() {
     const marker = L.marker([this.currentLocationLatitude, this.currentLocationLongitude], { icon: this._defaultIcon }).addTo(this._map);
-debugger
     this._driverCoordinates.forEach((coord: any, index: any) => {
       setTimeout(() => {
         marker.setLatLng([coord.lat, coord.lng]);
         this._map.setView([coord.lat, coord.lng], 16);
       }, 400 * index);
-    }).addTo(this._map);
+    });
   }
 
 
@@ -119,7 +117,7 @@ debugger
       geocoder: null,
       addWaypoints: false
     }).on('routesfound', (e: any) => {
-      debugger
+
       this._driverCoordinates = e.routes[0].coordinates;
     }).addTo(this._map);
   }
