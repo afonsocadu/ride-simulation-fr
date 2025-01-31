@@ -1,159 +1,121 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import 'leaflet-control-geocoder';
-import axios from "axios";
+import axios from 'axios';
 
-declare module 'leaflet' {
-  namespace Control {
-    namespace Geocoder {
-      const nominatim: (options?: any) => any;
-    }
-  }
-}
+declare module 'leaflet' { namespace Control { namespace Geocoder {const nominatim: (options?: any) => any;}}}
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, AfterViewInit {
-  public currentLocationLatitude: number = 0;
-  public currentLocationLongitude: number = 0;
+export class DashboardComponent {
+  protected _showMap = false;
+  protected _inputCurrentLocation = '';
+  protected _inputDestinationLocation = '';
+  protected _map!: L.Map;
+  protected _routingControl: any;
+
+  // User current location
+  private currentLocationLatitude = 0;
+  private currentLocationLongitude = 0;
   private _isCurrentLocationRendered: boolean = false;
 
-  public destinationLocationLatitude: number = 0;
-  public destinationLocationLongitude: number = 0;
+  // User destination location
+  private destinationLocationLatitude = 0;
+  private destinationLocationLongitude = 0;
   private _isDestinationLocationRendered: boolean = false;
 
-  public userLatitude: number = 0;
-  public userLongitude: number = 0;
-
-  protected _showMap: boolean = false;
-  protected _currentLocation: string = '';
-  protected _destinationLocation: string = '';
-  title = 'ride-simulation-fr';
-  public map!: L.Map;
-  public DefaultIcon = L.icon({
+  // Default icon for the map
+  private _defaultIcon = L.icon({
     iconUrl: '/assets/leaflet/location.png',
     iconSize: [41, 41],
   });
-  public routingControl: any;
 
-  constructor() { }
-
-  ngOnInit(): void {
-
-    //this._initializeMap();
-  }
-
-  async ngAfterViewInit() {
-  }
-
-  protected _onSubmit() {
+  constructor() {}
+  protected _onSubmit(): void {
     this._isCurrentLocationRendered = false;
     this._isDestinationLocationRendered = false;
-    if (this._showMap == false) {
-      this._showMap = true;
-
-
-    }
-    this._setCurrentLocation();
-    this._setDestinationLocation();
+    this._setCurrentLocation().then(() => this._updateMapIfReady());
+    this._setDestinationLocation().then(() => this._updateMapIfReady());
+    this._showMap = true;
   }
 
-
-  private _setCurrentLocation() {
-    axios.get("https://nominatim.openstreetmap.org/search", {
-      params: {
-        format: 'json',
-        q: this._currentLocation
-      }
-    }).then((response) => {
-      //const geocoder = L.Control.Geocoder.nominatim();
-
-      const location: number[] = response.data[0].boundingbox
-      this.currentLocationLatitude = location[0] //Minimum latitude
-      this.currentLocationLongitude = location[2] //Maximum longitude
-
-      this._isCurrentLocationRendered = true;
-
-      // Process the response here
-      console.log(response.data);
-    }).catch(function(error) {
-      console.error("Error fetching geocode data:", error);
-    });
-  }
-
-  private _setDestinationLocation() {
-    axios.get("https://nominatim.openstreetmap.org/search", {
-      params: {
-        format: 'json',
-        q: this._destinationLocation
-      }
-    }).then((response) => {
-
-      //const geocoder = L.Control.Geocoder.nominatim();
-
-      const location:number[] = response.data[0].boundingbox
-      this.destinationLocationLatitude = location[0] //Minimum latitude
-      this.destinationLocationLongitude = location[2] //Maximum longitude
-
-      this._isDestinationLocationRendered = true;
+  private async _setCurrentLocation(): Promise<void> {
+    try {
+      const response = await axios.get('https://nominatim.openstreetmap.org/search', {
+        params: { format: 'json', q: this._inputCurrentLocation }
+      });
 debugger
-      if (this._isCurrentLocationRendered && this._isDestinationLocationRendered) {
-        this._updateMap()
-      }
-      console.log(response.data);
-    }).catch(function(error) {
-      console.error("Error fetching geocode data:", error);
-    });
+      const location = response.data[0].boundingbox;
+      this.currentLocationLatitude = location[0];
+      this.currentLocationLongitude = location[2];
+      this._isCurrentLocationRendered = true;
+    } catch (error) {
+      console.error('Error fetching geocode data:', error);
+    }
   }
 
+  /** Set destination location based on the input value */
+  private async _setDestinationLocation(): Promise<void> {
+    try {
+      const response = await axios.get('https://nominatim.openstreetmap.org/search', {
+        params: { format: 'json', q: this._inputDestinationLocation }
+      });
 
-  private _initializeMap() {
-    // Destrua o mapa existente, se necessário
-    if (this.map) {
-      this.map.remove(); // Remove a instância atual do mapa
+      const location = response.data[0].boundingbox;
+      this.destinationLocationLatitude = location[0];
+      this.destinationLocationLongitude = location[2];
+      this._isDestinationLocationRendered = true;
+    } catch (error) {
+      console.error('Error fetching geocode data:', error);
     }
+  }
 
-    L.Marker.prototype.options.icon = this.DefaultIcon;
+  private _updateMapIfReady(): void {
+    if (this._isCurrentLocationRendered && this._isDestinationLocationRendered) {
+      this._updateMap();
+    }
+  }
 
-    // Inicialize o mapa com as configurações básicas
-    this.map = L.map('map').setView([this.currentLocationLatitude, this.currentLocationLongitude], 14);
+  private _initializeMap(): void {
+    if (this._map) this._map.remove();
 
-    // Adicione a camada de tiles
+    L.Marker.prototype.options.icon = this._defaultIcon;
+    this._map = L.map('map').setView([this.currentLocationLatitude, this.currentLocationLongitude], 14);
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
-    }).addTo(this.map);
+    }).addTo(this._map);
 
-    // Configure o controle de roteamento
-    this.routingControl = L.Routing.control({
+    this._routingControl = L.Routing.control({
       waypoints: [
         L.latLng(this.currentLocationLatitude, this.currentLocationLongitude),
         L.latLng(this.destinationLocationLatitude, this.destinationLocationLongitude)
       ],
-      waypointMode: "connect",
+      waypointMode: 'connect',
       showAlternatives: false,
       show: false,
       geocoder: null,
       addWaypoints: false
-    }).addTo(this.map);
+    }).addTo(this._map);
   }
 
-  private _updateMap() {
-    // Atualize as configurações do mapa sem reinitializar completamente
-    if (this.map) {
-      this.map.setView([this.currentLocationLatitude, this.currentLocationLongitude], 14);
-
-      if (this.routingControl) {
-        this.routingControl.setWaypoints([
-          L.latLng(this.currentLocationLatitude, this.currentLocationLongitude),
-          L.latLng(this.destinationLocationLatitude, this.destinationLocationLongitude)
-        ]);
-      }
-    } else {
-      // Caso o mapa ainda não tenha sido inicializado
+  private _updateMap(): void {
+    if (!this._map) {
       this._initializeMap();
+      return;
+    }
+
+    this._map.setView([this.currentLocationLatitude, this.currentLocationLongitude], 14);
+
+    if (this._routingControl) {
+      this._routingControl.setWaypoints([
+        L.latLng(this.currentLocationLatitude, this.currentLocationLongitude),
+        L.latLng(this.destinationLocationLatitude, this.destinationLocationLongitude)
+      ]);
     }
   }
 }
