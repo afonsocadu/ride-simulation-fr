@@ -1,5 +1,5 @@
 <div id="dashboard">
-  <h1 class="app-title">Rise Simulation</h1>
+  <h1 class="app-title">Ride Simulation</h1>
 
   <!-- Input container -->
   <div class="input-container">
@@ -13,6 +13,6 @@
     <div id="map" class="map-frame"></div>
   </div>
 
-  <button (click)="_requestDriver()">Request a driver</button>
+  <button *ngIf="_allowButtonRequestDriver" (click)="_requestDriver()">Request a driver</button>
 </div>
 

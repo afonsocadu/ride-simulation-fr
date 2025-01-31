@@ -17,6 +17,7 @@ export class DashboardComponent {
   protected _inputDestinationLocation = '';
   protected _map!: L.Map;
   protected _routingControl: any;
+  protected _allowButtonRequestDriver = false;
 
   // User current location
   private currentLocationLatitude = 0;
@@ -27,6 +28,8 @@ export class DashboardComponent {
   private destinationLocationLatitude = 0;
   private destinationLocationLongitude = 0;
   private _isDestinationLocationRendered: boolean = false;
+
+  private _driverCoordinates: any;
 
   // Default icon for the map
   private _defaultIcon = L.icon({
@@ -41,12 +44,20 @@ export class DashboardComponent {
     this._setCurrentLocation().then(() => this._updateMapIfReady());
     this._setDestinationLocation().then(() => this._updateMapIfReady());
     this._showMap = true;
+    this._allowButtonRequestDriver = true;
   }
 
   protected _requestDriver() {
-
-
+    const marker = L.marker([this.currentLocationLatitude, this.currentLocationLongitude], { icon: this._defaultIcon }).addTo(this._map);
+debugger
+    this._driverCoordinates.forEach((coord: any, index: any) => {
+      setTimeout(() => {
+        marker.setLatLng([coord.lat, coord.lng]);
+        this._map.setView([coord.lat, coord.lng], 16);
+      }, 400 * index);
+    }).addTo(this._map);
   }
+
 
   private async _setCurrentLocation(): Promise<void> {
     try {
@@ -86,7 +97,9 @@ debugger
   }
 
   private _initializeMap(): void {
-    if (this._map) this._map.remove();
+    if (this._map) {
+      this._map.remove();
+    }
 
     L.Marker.prototype.options.icon = this._defaultIcon;
     this._map = L.map('map').setView([this.currentLocationLatitude, this.currentLocationLongitude], 14);
@@ -105,9 +118,13 @@ debugger
       show: false,
       geocoder: null,
       addWaypoints: false
+    }).on('routesfound', (e: any) => {
+      debugger
+      this._driverCoordinates = e.routes[0].coordinates;
     }).addTo(this._map);
   }
 
+//options.waypoints.
   private _updateMap(): void {
     if (!this._map) {
       this._initializeMap();

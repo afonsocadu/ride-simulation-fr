@@ -21,6 +21,11 @@
   padding: 20px;
 }
 
+#dashboard > button {
+  width: 100%;
+  max-width: 500px;
+}
+
 .map-container {
   display: flex;
   justify-content: center;
@@ -87,7 +92,7 @@ button:hover {
   input[type="text"],
   button {
     padding: 10px;
-    font-size: 14px;
+    font-size: 14px;;
   }
 }
 
