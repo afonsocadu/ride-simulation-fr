@@ -43,6 +43,11 @@ export class DashboardComponent {
     this._showMap = true;
   }
 
+  protected _requestDriver() {
+
+
+  }
+
   private async _setCurrentLocation(): Promise<void> {
     try {
       const response = await axios.get('https://nominatim.openstreetmap.org/search', {

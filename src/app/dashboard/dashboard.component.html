@@ -1,8 +1,18 @@
-<div class="input-container">
-  <input type="text" placeholder="Enter your current location" [(ngModel)]="_inputCurrentLocation" />
-  <input type="text" placeholder="Enter your destination" [(ngModel)]="_inputDestinationLocation" />
-  <button (click)="_onSubmit()">Submit</button>
+<div id="dashboard">
+  <h1 class="app-title">Rise Simulation</h1>
+
+  <!-- Input container -->
+  <div class="input-container">
+    <input type="text" placeholder="Enter your current location" [(ngModel)]="_inputCurrentLocation" />
+    <input type="text" placeholder="Enter your destination" [(ngModel)]="_inputDestinationLocation" />
+    <button (click)="_onSubmit()">Submit</button>
+  </div>
+
+  <!-- Container Map -->
+  <div class="map-container" *ngIf="_showMap">
+    <div id="map" class="map-frame"></div>
+  </div>
+
+  <button (click)="_requestDriver()">Request a driver</button>
 </div>
-<div class="map-container" *ngIf="_showMap">
-  <div id="map" class="map-frame"></div>
-</div>
+
