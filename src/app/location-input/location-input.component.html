@@ -1,0 +1,11 @@
+<div id="dashboard">
+  <h1 class="app-title">Ride Simulation</h1>
+
+  <!-- Input container -->
+  <div class="input-container">
+    <input type="text" placeholder="Enter your current location" [(ngModel)]="_inputCurrentLocation" />
+    <input type="text" placeholder="Enter your destination" [(ngModel)]="_inputDestinationLocation" />
+    <button (click)="_onSubmit()">Submit</button>
+  </div>
+</div>
+

@@ -7,12 +7,16 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./auth.interceptor";
 import {FormsModule} from "@angular/forms";
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LocationInputComponent } from './location-input/location-input.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
+    LocationInputComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,

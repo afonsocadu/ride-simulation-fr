@@ -3,7 +3,7 @@ import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import 'leaflet-control-geocoder';
 import axios from 'axios';
-declare module 'leaflet' { namespace Control { namespace Geocoder {const nominatim: (options?: any) => any;}}}
+//declare module 'leaflet' { namespace Control { namespace Geocoder {const nominatim: (options?: any) => any;}}}
 
 @Component({
   selector: 'app-dashboard',
