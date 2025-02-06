@@ -9,6 +9,7 @@ import {FormsModule} from "@angular/forms";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LocationInputComponent } from './location-input/location-input.component';
 import { MapComponent } from './map/map.component';
+import { DriverModalComponent } from './map/driver-modal/driver-modal.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,8 @@ import { MapComponent } from './map/map.component';
     DashboardComponent,
     LocationInputComponent,
     MapComponent,
+    DriverModalComponent,
+    MatDialogModule
   ],
   imports: [
     BrowserModule,

@@ -20,9 +20,6 @@ declare module 'leaflet' {
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
-  protected _showMap = false;
-  protected _inputCurrentLocation = '';
-  protected _inputDestinationLocation = '';
   protected _map!: L.Map;
   protected _routingControl: any;
   protected _allowButtonRequestDriver = false;
@@ -30,7 +27,6 @@ export class MapComponent implements OnInit {
   // User current location
   private currentLocationLatitude: any = 0;
   private currentLocationLongitude = 0;
-  private _isCurrentLocationRendered = false;
 
   // User destination location
   private destinationLocationLatitude = 0;
@@ -45,11 +41,56 @@ export class MapComponent implements OnInit {
     iconSize: [41, 41],
   });
 
-  constructor(private _locationService: LocationService) {}
+  constructor(private _locationService: LocationService, private _dialog: MatDialog) {}
 
   ngOnInit(): void {
     this._initializeMap();
+    this._setLocations()
+  }
 
+  private _initializeMap(): void {
+    if (this._map) {
+      this._map.remove();
+    }
+
+    L.Marker.prototype.options.icon = this._defaultIcon;
+    this._map = L.map('map').setView([0, 0], 14);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
+    }).addTo(this._map);
+  }
+
+  protected _requestDriver(): void {
+    this._initializeMap();
+    const { mockDriverLat, mockDriverLng } = this._generateDriverMockLocation();
+
+    this._routingControl = L.Routing.control({
+      waypoints: [
+        L.latLng(this.currentLocationLatitude, this.currentLocationLongitude),
+        L.latLng(mockDriverLat, mockDriverLng),
+      ],
+      waypointMode: 'connect',
+      showAlternatives: false,
+      show: false,
+      geocoder: null,
+      addWaypoints: false,
+    }).on('routesfound', (e: any) => {
+      this._driverCoordinates = e.routes[0].coordinates;
+    }).addTo(this._map);
+  }
+
+  _generateDriverMockLocation(): { mockDriverLat: number; mockDriverLng: number } {
+    const currentLat = parseFloat(this.currentLocationLatitude.toString())
+    const currentLng = parseFloat(this.currentLocationLongitude.toString());
+    return {
+      mockDriverLat: currentLat + 0.01,
+      mockDriverLng: currentLng + 0.01
+    };
+  }
+
+  // Sets the current and destination locations from the provided input data
+  private _setLocations(): void {
     this._locationService.locations$.subscribe((locationData) => {
       this.currentLocationLatitude = locationData.currentLocation.latitude;
       this.currentLocationLongitude = locationData.currentLocation.longitude;
@@ -75,72 +116,8 @@ export class MapComponent implements OnInit {
     });
   }
 
-  private _initializeMap(): void {
-    if (this._map) {
-      this._map.remove();
-    }
 
-    L.Marker.prototype.options.icon = this._defaultIcon;
-    this._map = L.map('map').setView([0, 0], 14);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors',
-    }).addTo(this._map);
-  }
 
-  protected _requestDriver(): void {
-    this._initializeMap();
-    const currentLat = parseFloat(this.currentLocationLatitude);
 
-    const currentLng = parseFloat(this.currentLocationLongitude.toString());
-    const mockLat = currentLat + 0.01;
-    const mockLng = currentLng + 0.01;
-
-    debugger
-    this._routingControl = L.Routing.control({
-      waypoints: [
-        L.latLng(this.currentLocationLatitude, this.currentLocationLongitude),
-        L.latLng(mockLat, mockLng),
-      ],
-      waypointMode: 'connect',
-      showAlternatives: false,
-      show: false,
-      geocoder: null,
-      addWaypoints: false,
-    }).on('routesfound', (e: any) => {
-      this._driverCoordinates = e.routes[0].coordinates;
-    }).addTo(this._map);
-
-    this._allowButtonRequestDriver = true;
-  }
-
-  private _updateMap(): void {
-    if (!this._map) {
-      return;
-    }
-
-    this._map.setView([this.currentLocationLatitude, this.currentLocationLongitude], 14);
-
-    if (this._routingControl) {
-      this._routingControl.setWaypoints([
-        L.latLng(this.currentLocationLatitude, this.currentLocationLongitude),
-        L.latLng(this.destinationLocationLatitude, this.destinationLocationLongitude),
-      ]);
-    }
-  }
-
-  private _updateMap2(): void {
-    if (!this._map) {
-      return;
-    }
-
-    this._map.setView([this.currentLocationLatitude, this.currentLocationLongitude], 14);
-
-    if (this._routingControl) {
-      this._routingControl.setWaypoints([
-        L.latLng(this.currentLocationLatitude, this.currentLocationLongitude),
-        L.latLng(this.destinationLocationLatitude, this.destinationLocationLongitude),
-      ]);
-    }
-  }
 }
