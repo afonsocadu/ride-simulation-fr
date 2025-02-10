@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit{
       response => {
         console.log(response)
         if (response.status == 200) {
-          this._router.navigate(['/dashboard']);
+          this._router.navigate(['/location-input']);
         }
       }
     )

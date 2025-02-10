@@ -7,12 +7,5 @@
     <input type="text" placeholder="Enter your destination" [(ngModel)]="_inputDestinationLocation" />
     <button (click)="_onSubmit()">Submit</button>
   </div>
-
-  <!-- Container Map -->
-  <div class="map-container" *ngIf="_showMap">
-    <div id="map" class="map-frame"></div>
-  </div>
-
-  <button *ngIf="_allowButtonRequestDriver" (click)="_requestDriver()">Request a driver</button>
 </div>
 

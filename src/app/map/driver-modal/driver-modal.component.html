@@ -1,0 +1,12 @@
+<div class="modal-container">
+  <h2 class="modal-title">Driver details</h2>
+
+  <div class="modal-content">
+    <p><strong>Estimated Price:</strong> {{ _price | currency:'EUR' }}</p>
+    <p><strong>Estimated Time:</strong> 10 min</p>
+    <p><strong>Distance:</strong> 5 km</p>
+  </div>
+
+  <button (click)="closeModal(true)">Confirm driver</button>
+  <button (click)="closeModal(false)">Cancel request</button>
+</div>
