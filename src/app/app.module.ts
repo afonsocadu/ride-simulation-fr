@@ -10,6 +10,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LocationInputComponent } from './location-input/location-input.component';
 import { MapComponent } from './map/map.component';
 import { DriverModalComponent } from './map/driver-modal/driver-modal.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,14 +20,15 @@ import { DriverModalComponent } from './map/driver-modal/driver-modal.component'
     DashboardComponent,
     LocationInputComponent,
     MapComponent,
-    DriverModalComponent,
-    MatDialogModule
+    DriverModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {

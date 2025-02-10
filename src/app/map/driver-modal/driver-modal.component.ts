@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-driver-modal',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DriverModalComponent implements OnInit {
   protected _price?: number;
-  constructor() {
+  constructor(private dialogRef: MatDialogRef<any>) {
     this._generatePrice();
   }
 
@@ -16,6 +17,10 @@ export class DriverModalComponent implements OnInit {
 
   private _generatePrice(): void {
 
+  }
+
+  closeModal(event: boolean): void {
+    this.dialogRef.close(event);
   }
 
 }

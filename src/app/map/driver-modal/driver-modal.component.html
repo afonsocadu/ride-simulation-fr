@@ -1,4 +1,12 @@
-<p>Car 1</p>
-<p *ngIf="_price !== undefined">Price: ${{ _price }}</p>
+<div class="modal-container">
+  <h2 class="modal-title">Driver details</h2>
 
-<button></button>
+  <div class="modal-content">
+    <p><strong>Estimated Price:</strong> {{ _price | currency:'EUR' }}</p>
+    <p><strong>Estimated Time:</strong> 10 min</p>
+    <p><strong>Distance:</strong> 5 km</p>
+  </div>
+
+  <button (click)="closeModal(true)">Confirm driver</button>
+  <button (click)="closeModal(false)">Cancel request</button>
+</div>
