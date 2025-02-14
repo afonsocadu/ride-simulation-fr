@@ -84,6 +84,19 @@ button:hover {
 
 /* Media Queries for Responsiveness */
 @media screen and (max-width: 600px) {
+  #dashboard {
+    height: auto;
+    padding: 10px;
+  }
+
+  .map-container {
+    height: 50%;
+  }
+
+  .map-frame {
+    height: 50%;
+  }
+
   .input-container {
     width: 100%;
     max-width: 400px;
@@ -92,7 +105,7 @@ button:hover {
   input[type="text"],
   button {
     padding: 10px;
-    font-size: 14px;;
+    font-size: 14px;
   }
 }
 

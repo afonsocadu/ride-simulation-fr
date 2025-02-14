@@ -86,7 +86,7 @@ export class MapComponent implements OnInit {
 
       const marker = L.marker([mockDriverLat, mockDriverLng], { icon: this._defaultIcon })
         .addTo(this._map)
-        .bindPopup('<b>Your driver is here!</b>')
+          .bindPopup('<b>Your driver is here!</b>')
         .openPopup();
 
       this._moveMarker(marker);

@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import axios from "axios";
 import {LocationService} from "./LocationService";
 import {Router} from "@angular/router";
-import {LocationService2} from "./locationService2";
 
 @Component({
   selector: 'app-location-input',
@@ -25,8 +24,6 @@ export class LocationInputComponent {
 
   constructor(
     private _locationService: LocationService,
-    private _locationService2: LocationService2,
-
     private _router: Router
   ) { }
 
@@ -75,17 +72,6 @@ export class LocationInputComponent {
         { latitude: this.currentLocationLatitude, longitude: this.currentLocationLongitude },
         { latitude: this.destinationLocationLatitude, longitude: this.destinationLocationLongitude }
       );
-      const lcurrentLocation = {
-        latitude: this.currentLocationLatitude,
-        longitude: this.currentLocationLongitude
-      };
-      const ldestinationLocation = {
-        latitude: this.destinationLocationLatitude,
-        longitude: this.destinationLocationLongitude
-      };
-
-      this._locationService2.currentLocation = lcurrentLocation;
-      this._locationService2.destinationLocation = ldestinationLocation
 
       this._router.navigate(['/map']);
 
