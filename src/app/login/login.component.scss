@@ -1,6 +1,6 @@
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #e9f5f5;
+  background-color: #f0f4f8;
   margin: 0;
   padding: 0;
   height: 100vh;
@@ -12,22 +12,20 @@ body {
 
 .main {
   background-color: #ffffff;
-  padding: 20px;
+  padding: 24px;
   width: 360px;
   max-width: 90%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
   border-radius: 12px;
 }
 
-/* Title */
 h2 {
   text-align: center;
-  color: #4CAF50;
+  color: #2c3e50;
   margin-bottom: 20px;
   font-weight: 600;
 }
 
-/* Labels */
 label {
   font-weight: bold;
   color: #34495e;
@@ -35,31 +33,29 @@ label {
   margin-bottom: 5px;
 }
 
-/* Input Fields */
 input[type="email"],
 input[type="password"] {
   width: 100%;
   padding: 12px;
   margin-bottom: 15px;
-  border: 1px solid #b0c4de;
+  border: 1px solid #d0e1e7;
   border-radius: 8px;
   box-sizing: border-box;
-  background-color: #f7f9fc;
-  color: #333;
+  background-color: #ecf1f4;
+  color: #34495e;
 }
 
 input[type="email"]:focus,
 input[type="password"]:focus {
-  border-color: #2980b9;
+  border-color: #3498db;
   outline: none;
-  box-shadow: 0 0 5px rgba(41, 128, 185, 0.5);
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
 }
 
-/* Button login */
 .button-pattern {
   width: 100%;
   padding: 12px;
-  background-color: #4CAF50;
+  background-color: #3498db;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -70,13 +66,13 @@ input[type="password"]:focus {
 }
 
 .button-pattern:hover {
-  background-color: #45a049;
+  background-color: #2980b9;
 }
 
 button.recruiter-btn {
   width: 100%;
   padding: 12px;
-  background-color: #48c9b0;
+  background-color: #16a085;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -87,20 +83,20 @@ button.recruiter-btn {
 }
 
 button.recruiter-btn:hover {
-  background-color: #16a085;
+  background-color: #1abc9c;
 }
 
 .other-options {
   margin-top: 16px;
   text-align: center;
-  color: #5d6d7e;
+  color: #7f8c8d;
   font-size: 14px;
 }
 
 .button-recruiter {
   width: 100%;
   padding: 12px;
-  background-color: #82e0aa;
+  background-color: #2ecc71;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -112,7 +108,7 @@ button.recruiter-btn:hover {
 }
 
 .button-recruiter:hover {
-  background-color: #58d68d;
+  background-color: #27ae60;
 }
 
 @media (max-width: 768px) {

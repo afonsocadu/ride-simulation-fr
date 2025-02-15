@@ -7,7 +7,7 @@
 .app-title {
   font-size: 32px;
   font-weight: bold;
-  color: #4CAF50;
+  color: #2c3e50;
   margin-bottom: 20px;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .map-frame {
-  border: 2px solid black;
+  border: 2px solid #bdc3c7;
   width: 90%;
   height: 70%;
   max-width: 800px;
@@ -72,14 +72,14 @@ button {
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #3498db;
   color: white;
   border: none;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #2980b9;
 }
 
 /* Media Queries for Responsiveness */
@@ -92,7 +92,7 @@ button:hover {
   input[type="text"],
   button {
     padding: 10px;
-    font-size: 14px;;
+    font-size: 14px;
   }
 }
 

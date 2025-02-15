@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import 'leaflet-control-geocoder';
-import { LocationService } from '../location-input/LocationService';
-import { MatDialog } from "@angular/material/dialog";
-import { DriverModalComponent } from "./driver-modal/driver-modal.component";
-
+import {LocationService} from '../location-input/LocationService';
+import {MatDialog} from "@angular/material/dialog";
+import {DriverModalComponent} from "./driver-modal/driver-modal.component";
 declare module 'leaflet' {
   namespace Control {
     namespace Geocoder {
@@ -40,7 +39,8 @@ export class MapComponent implements OnInit {
     iconSize: [41, 41],
   });
 
-  constructor(private _locationService: LocationService, private _dialog: MatDialog) {}
+  constructor(private _locationService: LocationService, private _dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     this._initializeMap();
@@ -49,7 +49,7 @@ export class MapComponent implements OnInit {
 
   protected _requestDriver(): void {
     this._initializeMap();
-    const { mockDriverLat, mockDriverLng } = this._generateDriverMockLocation();
+    const {mockDriverLat, mockDriverLng} = this._generateDriverMockLocation();
     this._setupRoutingControl(mockDriverLat, mockDriverLng);
     this._openDriverModal(mockDriverLat, mockDriverLng);
   }
@@ -79,33 +79,41 @@ export class MapComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      debugger
-      if(result === 'cancel') {
+      if (result === false) {
+        this._setLocations()
         return;
       }
 
-      const marker = L.marker([mockDriverLat, mockDriverLng], { icon: this._defaultIcon })
+      const marker = L.marker([mockDriverLat, mockDriverLng], {icon: this._defaultIcon})
         .addTo(this._map)
-          .bindPopup('<b>Your driver is here!</b>')
+        .bindPopup('<b>Your driver is here!</b>')
         .openPopup();
 
       this._moveMarker(marker);
     });
   }
 
+  /* Move the driver to the user's location */
   private _moveMarker(marker: L.Marker): void {
     this._driverCoordinates.forEach((coord: any, index: any) => {
       setTimeout(() => {
         marker.setLatLng([coord.lat, coord.lng]);
         this._map.setView([coord.lat, coord.lng], 16);
         if (index === this._driverCoordinates.length - 1) {
+          setTimeout(() => {
 
+            const popup = L.popup()
+              .setLatLng([this.currentLocationLatitude, this.currentLocationLongitude])
+              .setContent('<b>Driver has arrived!</b>')
+              .openOn(this._map);
+            this._onDriverArrival();
 
-          this._onDriverArrival();
+          }, 4000);
         }
       }, 100 * index);
     });
   }
+
   private _onDriverArrival(): void {
     this._initializeMap();
     this._routingControl = L.Routing.control({
@@ -124,6 +132,7 @@ export class MapComponent implements OnInit {
     }).addTo(this._map);
   }
 
+  // Move the driver to the destination location
   private _moveMarkerToDestination(): void {
     const marker = L.marker([this.currentLocationLatitude, this.currentLocationLongitude],).addTo(this._map);
     this._driverCoordinates.forEach((coord: any, index: any) => {
