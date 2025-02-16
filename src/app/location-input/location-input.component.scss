@@ -7,7 +7,7 @@
 .app-title {
   font-size: 32px;
   font-weight: bold;
-  color: #4CAF50;
+  color: #2c3e50;
   margin-bottom: 20px;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .map-frame {
-  border: 2px solid black;
+  border: 2px solid #bdc3c7;
   width: 90%;
   height: 70%;
   max-width: 800px;
@@ -51,24 +51,23 @@
   margin: 0;
 }
 
-
 input[type="text"],
 button {
   padding: 12px;
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid #ccc;
+  border: 1px solid #bdc3c7;
   border-radius: 4px;
   font-size: 16px;
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #3498db;
   color: white;
   border: none;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #2980b9;
 }

@@ -1,6 +1,6 @@
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #e9f5f5; /* Fundo mais suave em tom pastel */
+  background-color: #f0f4f8;
   margin: 0;
   padding: 0;
   height: 100vh;
@@ -12,54 +12,50 @@ body {
 
 .main {
   background-color: #ffffff;
-  padding: 20px;
+  padding: 24px;
   width: 360px;
-  max-width: 90%; /* Adicionado para limitar largura em dispositivos menores */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border-radius: 12px; /* Cantos mais arredondados */
+  max-width: 90%;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
 }
 
-/* Title */
 h2 {
   text-align: center;
-  color: #2b2b2b; /* Um cinza escuro para contraste */
+  color: #2c3e50;
   margin-bottom: 20px;
   font-weight: 600;
 }
 
-/* Labels */
 label {
   font-weight: bold;
-  color: #34495e; /* Azul acinzentado */
+  color: #34495e;
   display: block;
   margin-bottom: 5px;
 }
 
-/* Input Fields */
 input[type="email"],
 input[type="password"] {
   width: 100%;
   padding: 12px;
   margin-bottom: 15px;
-  border: 1px solid #b0c4de; /* Borda azul clara */
-  border-radius: 8px; /* Cantos arredondados */
+  border: 1px solid #d0e1e7;
+  border-radius: 8px;
   box-sizing: border-box;
-  background-color: #f7f9fc; /* Fundo claro */
-  color: #333;
+  background-color: #ecf1f4;
+  color: #34495e;
 }
 
 input[type="email"]:focus,
 input[type="password"]:focus {
-  border-color: #2980b9; /* Azul mais vivo no foco */
+  border-color: #3498db;
   outline: none;
-  box-shadow: 0 0 5px rgba(41, 128, 185, 0.5);
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
 }
 
-/* Button login */
 .button-pattern {
   width: 100%;
   padding: 12px;
-  background-color: #5dade2; /* Azul suave */
+  background-color: #3498db;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -70,13 +66,13 @@ input[type="password"]:focus {
 }
 
 .button-pattern:hover {
-  background-color: #2e86c1; /* Azul mais escuro ao passar o cursor */
+  background-color: #2980b9;
 }
 
 button.recruiter-btn {
   width: 100%;
   padding: 12px;
-  background-color: #48c9b0; /* Verde água */
+  background-color: #16a085;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -87,20 +83,20 @@ button.recruiter-btn {
 }
 
 button.recruiter-btn:hover {
-  background-color: #16a085; /* Tom mais escuro de verde água */
+  background-color: #1abc9c;
 }
 
 .other-options {
   margin-top: 16px;
   text-align: center;
-  color: #5d6d7e; /* Cinza para textos menores */
+  color: #7f8c8d;
   font-size: 14px;
 }
 
 .button-recruiter {
   width: 100%;
   padding: 12px;
-  background-color: #82e0aa; /* Verde claro */
+  background-color: #2ecc71;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -112,33 +108,32 @@ button.recruiter-btn:hover {
 }
 
 .button-recruiter:hover {
-  background-color: #58d68d; /* Tom mais escuro de verde claro */
+  background-color: #27ae60;
 }
 
-/* Media queries for responsiveness */
 @media (max-width: 768px) {
   .main {
     padding: 16px;
-    width: 100%; /* Use toda a largura disponível */
-    max-width: 400px; /* Ainda limite a largura para manter a legibilidade */
+    width: 100%;
+    max-width: 400px;
   }
 
   h2 {
-    font-size: 20px; /* Reduza o tamanho do texto */
+    font-size: 20px;
     margin-bottom: 16px;
   }
 
   input[type="email"],
   input[type="password"] {
     padding: 10px;
-    font-size: 14px; /* Ajuste o tamanho da fonte */
+    font-size: 14px;
   }
 
   .button-pattern,
   .button-recruiter,
   button.recruiter-btn {
     padding: 10px;
-    font-size: 14px; /* Reduza o tamanho da fonte em botões */
+    font-size: 14px;
   }
 }
 
@@ -148,11 +143,11 @@ button.recruiter-btn:hover {
   }
 
   h2 {
-    font-size: 18px; /* Ajuste ainda menor para telas muito pequenas */
+    font-size: 18px;
   }
 
   .main {
-    padding: 12px; /* Reduza o padding para telas menores */
+    padding: 12px;
     border-radius: 8px;
   }
 }
