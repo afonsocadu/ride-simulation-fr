@@ -2,16 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import 'leaflet-control-geocoder';
-import {LocationService} from '../location-input/LocationService';
-import {MatDialog} from "@angular/material/dialog";
-import {DriverModalComponent} from "./driver-modal/driver-modal.component";
-declare module 'leaflet' {
-  namespace Control {
-    namespace Geocoder {
-      const nominatim: (options?: any) => any;
-    }
-  }
-}
+import { LocationService } from '../location-input/LocationService';
+import { MatDialog } from "@angular/material/dialog";
+import { DriverModalComponent } from "./driver-modal/driver-modal.component";
 
 @Component({
   selector: 'app-map',
@@ -31,7 +24,7 @@ export class MapComponent implements OnInit {
   private destinationLocationLatitude = 0;
   private destinationLocationLongitude = 0;
 
-  private _driverCoordinates: any;
+  private _driverCoordinates: string[] = [];
 
   // Default icon for the map
   private _defaultIcon = L.icon({
@@ -89,12 +82,12 @@ export class MapComponent implements OnInit {
         .bindPopup('<b>Your driver is here!</b>')
         .openPopup();
 
-      this._moveMarker(marker);
+      this._moveDriverToUserLocation(marker);
     });
   }
 
   /* Move the driver to the user's location */
-  private _moveMarker(marker: L.Marker): void {
+  private _moveDriverToUserLocation(marker: L.Marker): void {
     this._driverCoordinates.forEach((coord: any, index: any) => {
       setTimeout(() => {
         marker.setLatLng([coord.lat, coord.lng]);
@@ -102,13 +95,14 @@ export class MapComponent implements OnInit {
         if (index === this._driverCoordinates.length - 1) {
           setTimeout(() => {
 
-            const popup = L.popup()
+             L.popup()
               .setLatLng([this.currentLocationLatitude, this.currentLocationLongitude])
               .setContent('<b>Driver has arrived!</b>')
               .openOn(this._map);
-            this._onDriverArrival();
+             this._onDriverArrival();
 
           }, 4000);
+
         }
       }, 100 * index);
     });
@@ -128,12 +122,13 @@ export class MapComponent implements OnInit {
       addWaypoints: false
     }).on('routesfound', (e: any) => {
       this._driverCoordinates = e.routes[0].coordinates;
-      this._moveMarkerToDestination();
+      this._moveDriverToDestination();
     }).addTo(this._map);
   }
 
   // Move the driver to the destination location
-  private _moveMarkerToDestination(): void {
+  private _moveDriverToDestination(): void {
+    debugger
     const marker = L.marker([this.currentLocationLatitude, this.currentLocationLongitude],).addTo(this._map);
     this._driverCoordinates.forEach((coord: any, index: any) => {
       setTimeout(() => {
