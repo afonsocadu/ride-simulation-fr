@@ -3,10 +3,11 @@
 
   <div class="modal-content">
     <p><strong>Estimated Price:</strong> {{ _price | currency:'EUR' }}</p>
-    <p><strong>Estimated Time:</strong> 10 min</p>
-    <p><strong>Distance:</strong> 5 km</p>
+    <p><strong>Distance:</strong> {{ driverToUserDistance }} m</p>
   </div>
 
-  <button (click)="closeModal(true)">Confirm driver</button>
-  <button (click)="closeModal(false)">Cancel request</button>
+  <div>
+    <button (click)="closeModal(true)">Confirm driver</button>
+    <button (click)="closeModal(false)">Cancel request</button>
+  </div>
 </div>

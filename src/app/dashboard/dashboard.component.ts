@@ -61,7 +61,7 @@ export class DashboardComponent {
       const response = await axios.get('https://nominatim.openstreetmap.org/search', {
         params: { format: 'json', q: this._inputCurrentLocation }
       });
-debugger
+
       const location = response.data[0].boundingbox;
       this.currentLocationLatitude = location[0];
       this.currentLocationLongitude = location[2];

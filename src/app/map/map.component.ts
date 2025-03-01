@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import 'leaflet-control-geocoder';
-import { LocationService } from '../location-input/LocationService';
-import { MatDialog } from "@angular/material/dialog";
-import { DriverModalComponent } from "./driver-modal/driver-modal.component";
+import {LocationService} from '../location-input/LocationService';
+import {MatDialog} from "@angular/material/dialog";
+import {DriverModalComponent} from "./driver-modal/driver-modal.component";
 
 @Component({
   selector: 'app-map',
@@ -25,6 +25,8 @@ export class MapComponent implements OnInit {
   private destinationLocationLongitude = 0;
 
   private _driverCoordinates: string[] = [];
+  private _driverToUserDistance = 0;
+  private _totalDistance = 0;
 
   // Default icon for the map
   private _defaultIcon = L.icon({
@@ -40,11 +42,10 @@ export class MapComponent implements OnInit {
     this._setLocations();
   }
 
-  protected _requestDriver(): void {
+  protected async _requestDriver() {
     this._initializeMap();
     const {mockDriverLat, mockDriverLng} = this._generateDriverMockLocation();
     this._setupRoutingControl(mockDriverLat, mockDriverLng);
-    this._openDriverModal(mockDriverLat, mockDriverLng);
   }
 
   private _setupRoutingControl(mockDriverLat: number, mockDriverLng: number): void {
@@ -59,7 +60,10 @@ export class MapComponent implements OnInit {
       geocoder: null,
       addWaypoints: false,
     }).on('routesfound', (e: any) => {
+      this._driverToUserDistance = e.routes[0].summary.totalDistance;
       this._driverCoordinates = e.routes[0].coordinates;
+
+      this._openDriverModal(mockDriverLat, mockDriverLng);
     }).addTo(this._map);
     this._allowButtonRequestDriver = false;
   }
@@ -67,7 +71,7 @@ export class MapComponent implements OnInit {
   private _openDriverModal(mockDriverLat: number, mockDriverLng: number): void {
     const dialogRef = this._dialog.open(DriverModalComponent, {
       width: '500px',
-      data: {},
+      data: { driverToUserDistance: this._driverToUserDistance, totalDistance: this._totalDistance },
       panelClass: 'modal-container',
     });
 
@@ -93,16 +97,15 @@ export class MapComponent implements OnInit {
         marker.setLatLng([coord.lat, coord.lng]);
         this._map.setView([coord.lat, coord.lng], 16);
         if (index === this._driverCoordinates.length - 1) {
+
+          L.popup()
+            .setLatLng([coord.lat, coord.lng])
+            .setContent('<b>Driver has arrived!</b>')
+            .openOn(this._map);
+
           setTimeout(() => {
-
-             L.popup()
-              .setLatLng([this.currentLocationLatitude, this.currentLocationLongitude])
-              .setContent('<b>Driver has arrived!</b>')
-              .openOn(this._map);
-             this._onDriverArrival();
-
+            this._onDriverArrival();
           }, 4000);
-
         }
       }, 100 * index);
     });
@@ -128,11 +131,14 @@ export class MapComponent implements OnInit {
 
   // Move the driver to the destination location
   private _moveDriverToDestination(): void {
-    debugger
     const marker = L.marker([this.currentLocationLatitude, this.currentLocationLongitude],).addTo(this._map);
     this._driverCoordinates.forEach((coord: any, index: any) => {
       setTimeout(() => {
-        marker.setLatLng([coord.lat, coord.lng]);
+        marker.setLatLng([coord.lat, coord.lng])
+          .addTo(this._map)
+          .bindPopup('<b>Driver is on the way!</b>')
+          .openPopup();
+
         this._map.setView([coord.lat, coord.lng], 16);
         if (index === this._driverCoordinates.length - 1) {
 
@@ -189,6 +195,8 @@ export class MapComponent implements OnInit {
         addWaypoints: false,
       }).on('routesfound', (e: any) => {
         this._driverCoordinates = e.routes[0].coordinates;
+        this._totalDistance = e.routes[0].summary.totalDistance;
+
       }).addTo(this._map);
 
       this._allowButtonRequestDriver = true;
