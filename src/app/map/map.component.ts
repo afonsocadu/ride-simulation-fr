@@ -105,7 +105,7 @@ export class MapComponent implements OnInit {
 
           setTimeout(() => {
             this._onDriverArrival();
-          }, 4000);
+          }, 2000);
         }
       }, 100 * index);
     });

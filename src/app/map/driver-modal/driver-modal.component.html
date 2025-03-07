@@ -3,7 +3,8 @@
 
   <div class="modal-content">
     <p><strong>Estimated Price:</strong> {{ _price | currency:'EUR' }}</p>
-    <p><strong>Distance:</strong> {{ driverToUserDistance }} m</p>
+    <p><strong>Distance from driver:</strong> {{ driverToUserDistance }} m</p>
+    <p><strong>Distance from destination:</strong> {{ _totalDistance }} km</p>
   </div>
 
   <div>

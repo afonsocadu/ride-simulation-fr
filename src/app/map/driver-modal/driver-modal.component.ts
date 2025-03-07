@@ -1,5 +1,5 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-driver-modal',
@@ -9,14 +9,14 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 export class DriverModalComponent implements OnInit {
   protected _price?: number;
   protected driverToUserDistance?: number;
-  private _totalDistance: number = 0;
+  protected _totalDistance: number = 0;
 
   constructor(
     private dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.driverToUserDistance = data.driverToUserDistance;
-    this._totalDistance = data.totalDistance;
+    this._convertTotalDistanceToKm(data.totalDistance)
   }
 
   ngOnInit(): void {
@@ -36,4 +36,12 @@ export class DriverModalComponent implements OnInit {
     return baseFare + distanceInKm * costPerKm;
   }
 
+  // Converts the total distance from meters to kilometers
+  private _convertTotalDistanceToKm(totalDistance: number): void {
+    if (!totalDistance) {
+      return;
+    }
+    debugger
+    this._totalDistance = totalDistance / 1000;
+  }
 }

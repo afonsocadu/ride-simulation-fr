@@ -5,6 +5,7 @@ import {DashboardComponent} from "./dashboard/dashboard.component";
 import {MapComponent} from "./map/map.component";
 import {LocationInputComponent} from "./location-input/location-input.component";
 
+/* TODO: Consider use lazy loading*/
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
