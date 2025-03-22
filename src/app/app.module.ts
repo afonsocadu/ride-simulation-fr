@@ -12,6 +12,7 @@ import { MapComponent } from './map/map.component';
 import { DriverModalComponent } from './map/driver-modal/driver-modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserInfoComponent } from './user-info/user-info.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DashboardComponent,
     LocationInputComponent,
     MapComponent,
-    DriverModalComponent
+    DriverModalComponent,
+    UserInfoComponent
   ],
   imports: [
     BrowserModule,

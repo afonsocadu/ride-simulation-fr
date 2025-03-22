@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 
 @Component({
@@ -41,7 +41,7 @@ export class DriverModalComponent implements OnInit {
     if (!totalDistance) {
       return;
     }
-    debugger
+
     this._totalDistance = totalDistance / 1000;
   }
 }

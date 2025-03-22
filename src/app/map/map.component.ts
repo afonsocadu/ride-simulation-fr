@@ -5,6 +5,7 @@ import 'leaflet-control-geocoder';
 import {LocationService} from '../location-input/LocationService';
 import {MatDialog} from "@angular/material/dialog";
 import {DriverModalComponent} from "./driver-modal/driver-modal.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-map',
@@ -15,6 +16,7 @@ export class MapComponent implements OnInit {
   protected _map!: L.Map;
   protected _routingControl: any;
   protected _allowButtonRequestDriver = false;
+  protected _driverisMoving = false;
 
   // User current location
   private currentLocationLatitude: any = 0;
@@ -34,8 +36,10 @@ export class MapComponent implements OnInit {
     iconSize: [41, 41],
   });
 
-  constructor(private _locationService: LocationService, private _dialog: MatDialog) {
-  }
+  constructor(
+    private _locationService: LocationService,
+    private _dialog: MatDialog,
+    private _router: Router) { }
 
   ngOnInit(): void {
     this._initializeMap();
@@ -46,6 +50,11 @@ export class MapComponent implements OnInit {
     this._initializeMap();
     const {mockDriverLat, mockDriverLng} = this._generateDriverMockLocation();
     this._setupRoutingControl(mockDriverLat, mockDriverLng);
+  }
+
+  protected _cancelRide(): void {
+    this._driverisMoving = false;
+    this._router.navigate(['/user-info']);
   }
 
   private _setupRoutingControl(mockDriverLat: number, mockDriverLng: number): void {
@@ -80,7 +89,7 @@ export class MapComponent implements OnInit {
         this._setLocations()
         return;
       }
-
+      this._driverisMoving = result
       const marker = L.marker([mockDriverLat, mockDriverLng], {icon: this._defaultIcon})
         .addTo(this._map)
         .bindPopup('<b>Your driver is here!</b>')
