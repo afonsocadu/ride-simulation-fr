@@ -7,10 +7,20 @@ import {UserInfoService} from "./user-info.service";
   styleUrls: ['./user-info.component.scss']
 })
 export class UserInfoComponent implements OnInit {
-  constructor(private userInfoService: UserInfoService) { }
+  protected _email: string = '';
+  protected _totalRides: number = 0;
+
+  constructor(private _userInfoService: UserInfoService) { }
 
   ngOnInit(): void {
-    this.userInfoService.getUserInfo();
+    this._userInfoService.getUserInfo().subscribe((data: any) => {
+      if(data) {
+        debugger;
+        this._email = data.user_email
+        this._totalRides = data.total_rides
+      }
+    })
+    debugger
   }
 
 }

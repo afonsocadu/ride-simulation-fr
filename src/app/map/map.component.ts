@@ -6,6 +6,9 @@ import {LocationService} from '../location-input/LocationService';
 import {MatDialog} from "@angular/material/dialog";
 import {DriverModalComponent} from "./driver-modal/driver-modal.component";
 import {Router} from "@angular/router";
+import {UserInfoService} from "../user-info/user-info.service";
+import {lastValueFrom} from "rxjs";
+import {RideDetails} from "../user-info/user-info-config";
 
 @Component({
   selector: 'app-map',
@@ -39,9 +42,10 @@ export class MapComponent implements OnInit {
   constructor(
     private _locationService: LocationService,
     private _dialog: MatDialog,
-    private _router: Router) { }
+    private _router: Router,
+    private _userInfoService: UserInfoService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this._initializeMap();
     this._setLocations();
   }
@@ -77,6 +81,21 @@ export class MapComponent implements OnInit {
     this._allowButtonRequestDriver = false;
   }
 
+  // Create a ride registration in the database
+  private createRideRegistration() {
+    const details = {
+      destinationLatitude: this.destinationLocationLatitude,
+      destinationLongitude: this.destinationLocationLongitude,
+      originLatitude: this.currentLocationLatitude,
+      originLongitude: this.currentLocationLongitude,
+      completed: false,
+      price: 0
+    }
+    this._userInfoService.createUserInfo(details).subscribe((response) => {
+      console.log(response)
+    })
+  }
+
   private _openDriverModal(mockDriverLat: number, mockDriverLng: number): void {
     const dialogRef = this._dialog.open(DriverModalComponent, {
       width: '500px',
@@ -89,6 +108,8 @@ export class MapComponent implements OnInit {
         this._setLocations()
         return;
       }
+
+      this.createRideRegistration();
       this._driverisMoving = result
       const marker = L.marker([mockDriverLat, mockDriverLng], {icon: this._defaultIcon})
         .addTo(this._map)

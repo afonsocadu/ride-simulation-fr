@@ -1,0 +1,54 @@
+.uber-info {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.app-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 160px;
+  text-align: center;
+}
+
+.uber-info p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  color: #424242;
+  margin: 12px 0;
+  border-bottom: 1px solid #e6e6e6;
+  padding-bottom: 8px;
+}
+
+.uber-info p:last-child {
+  border-bottom: none;
+}
+
+.uber-info .label {
+  font-weight: 600;
+  color: #111;
+}
+
+.uber-info .value {
+  font-weight: 400;
+  color: #757575;
+}
+
+@media screen and (max-width: 600px) {
+  .uber-info {
+    padding: 15px;
+    max-width: 90%;
+  }
+
+  .uber-info p {
+    font-size: 14px;
+    margin: 10px 0;
+  }
+}

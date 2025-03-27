@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import { RideDetails } from './user-info-config';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,7 +9,15 @@ export class UserInfoService {
 
   constructor(private http: HttpClient) {}
 
-  getUserInfo(){
+  public getUserInfo(){
     return this.http.get(`${this.url}/rides`)
+  }
+
+  public createUserInfo(rider_details: RideDetails){
+    return this.http.post(`${this.url}/rides`, { rider_details })
+  }
+
+  public updateStatusInfo(completed: boolean) {
+    return this.http.put(`${this.url}/rides`, { completed })
   }
 }
