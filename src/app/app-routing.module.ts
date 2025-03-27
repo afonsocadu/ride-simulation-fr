@@ -4,13 +4,16 @@ import {LoginComponent} from "./login/login.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {MapComponent} from "./map/map.component";
 import {LocationInputComponent} from "./location-input/location-input.component";
+import {UserInfoComponent} from "./user-info/user-info.component";
 
+/* TODO: Consider use lazy loading*/
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'location-input', component: LocationInputComponent },
-  { path: 'map', component: MapComponent }
+  { path: 'map', component: MapComponent },
+  { path: 'user-info', component: UserInfoComponent }
 ];
 
 @NgModule({

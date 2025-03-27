@@ -6,7 +6,7 @@
 
 .modal-container {
   position: fixed;
-  bottom: 60px;
+  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -38,14 +38,15 @@ button {
   flex: 1;
   border-radius: 4px;
   font-size: 16px;
-  background-color: #4CAF50;
+  background-color: #3498db;
   color: white;
   border: none;
   cursor: pointer;
+  margin: 8px;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #2980b9;
 }
 
 @media (max-width: 600px) {
@@ -54,3 +55,5 @@ button:hover {
     font-size: 14px;
   }
 }
+
+
