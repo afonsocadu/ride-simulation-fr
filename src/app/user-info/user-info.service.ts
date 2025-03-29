@@ -17,7 +17,7 @@ export class UserInfoService {
     return this.http.post(`${this.url}/rides`, { rider_details })
   }
 
-  public updateStatusInfo(completed: boolean) {
-    return this.http.put(`${this.url}/rides`, { completed })
+  public updateStatusInfo(id: number, completed: boolean) {
+    return this.http.put(`${this.url}/rides/${id}`, { completed });
   }
 }

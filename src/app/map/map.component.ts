@@ -7,7 +7,6 @@ import {MatDialog} from "@angular/material/dialog";
 import {DriverModalComponent} from "./driver-modal/driver-modal.component";
 import {Router} from "@angular/router";
 import {UserInfoService} from "../user-info/user-info.service";
-import {lastValueFrom} from "rxjs";
 import {RideDetails} from "../user-info/user-info-config";
 
 @Component({
@@ -32,6 +31,8 @@ export class MapComponent implements OnInit {
   private _driverCoordinates: string[] = [];
   private _driverToUserDistance = 0;
   private _totalDistance = 0;
+
+  private _id: number = 0;
 
   // Default icon for the map
   private _defaultIcon = L.icon({
@@ -83,7 +84,7 @@ export class MapComponent implements OnInit {
 
   // Create a ride registration in the database
   private createRideRegistration() {
-    const details = {
+    const details: RideDetails = {
       destinationLatitude: this.destinationLocationLatitude,
       destinationLongitude: this.destinationLocationLongitude,
       originLatitude: this.currentLocationLatitude,
@@ -91,8 +92,8 @@ export class MapComponent implements OnInit {
       completed: false,
       price: 0
     }
-    this._userInfoService.createUserInfo(details).subscribe((response) => {
-      console.log(response)
+    this._userInfoService.createUserInfo(details).subscribe((response: any) => {
+     this._id = response.id;
     })
   }
 
@@ -176,6 +177,10 @@ export class MapComponent implements OnInit {
           this.currentLocationLatitude = this.destinationLocationLatitude;
           this.currentLocationLongitude = this.destinationLocationLongitude;
         }
+
+        if (index === this._driverCoordinates.length - 1) {
+          this._updateRideStatus(true);
+        }
       }, 100 * index);
     });
   }
@@ -231,5 +236,15 @@ export class MapComponent implements OnInit {
 
       this._allowButtonRequestDriver = true;
     });
+  }
+
+  // Update the ride status
+  private _updateRideStatus(status:boolean) {
+    debugger
+    this._userInfoService.updateStatusInfo(this._id, status).subscribe((response) => {
+      if(response) {
+        this._router.navigate(['/user-info']);
+      }
+    })
   }
 }

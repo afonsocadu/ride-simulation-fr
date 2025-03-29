@@ -13,14 +13,15 @@ export class UserInfoComponent implements OnInit {
   constructor(private _userInfoService: UserInfoService) { }
 
   ngOnInit(): void {
+    this._getUserInfo();
+  }
+
+  private _getUserInfo() {
     this._userInfoService.getUserInfo().subscribe((data: any) => {
-      if(data) {
-        debugger;
+      if (data) {
         this._email = data.user_email
         this._totalRides = data.total_rides
       }
     })
-    debugger
   }
-
 }
