@@ -13,6 +13,7 @@ import { DriverModalComponent } from './map/driver-modal/driver-modal.component'
 import {MatDialogModule} from "@angular/material/dialog";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserInfoComponent } from './user-info/user-info.component';
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
