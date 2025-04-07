@@ -28,7 +28,7 @@ export class AuthService {
    * Method to create new user
    */
   public createUser(email: string, password: string, password_confirmation: string): Observable<any> {
-    const confirmSuccessUrl = 'http://localhost:4200/confirmation-success'; // Adjust this URL as needed
+    const confirmSuccessUrl = 'http://localhost:4200/confirmation-success';
     return this._http.post(`${this._baseUrl}`, { email, password, password_confirmation, confirm_success_url: confirmSuccessUrl }, { observe: 'response' }).pipe(
       tap(response => {
         console.log('User created successfully', response);

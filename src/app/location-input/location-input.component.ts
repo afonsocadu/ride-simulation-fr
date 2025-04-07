@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import axios from "axios";
-import {LocationService} from "./LocationService";
-import {Router} from "@angular/router";
+import { LocationService } from "./location-service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-location-input',

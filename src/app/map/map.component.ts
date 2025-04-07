@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import 'leaflet-control-geocoder';
-import {LocationService} from '../location-input/LocationService';
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {DriverModalComponent} from "./driver-modal/driver-modal.component";
-import {Router} from "@angular/router";
-import {UserInfoService} from "../user-info/user-info.service";
-import {RideDetails} from "../user-info/user-info-config";
+import {LocationService} from '../location-input/location-service';
+import { MatDialog } from "@angular/material/dialog";
+import { DriverModalComponent } from "./driver-modal/driver-modal.component";
+import { Router } from "@angular/router";
+import { UserInfoService } from "../user-info/user-info.service";
+import { RideDetails } from "../user-info/user-info-config";
 
 @Component({
   selector: 'app-map',
@@ -19,6 +19,7 @@ export class MapComponent implements OnInit {
   protected _routingControl: any;
   protected _allowButtonRequestDriver = false;
   protected _driverisMoving = false;
+  protected _allowUserInfoButton: boolean = true;
 
   // User current location
   private currentLocationLatitude: any = 0;
@@ -136,6 +137,7 @@ export class MapComponent implements OnInit {
         if (this._changePage) {
           return;
         }
+        this._allowUserInfoButton = false;
 
         marker.setLatLng([coord.lat, coord.lng]);
         this._map.setView([coord.lat, coord.lng], 16);
@@ -197,6 +199,7 @@ export class MapComponent implements OnInit {
 
         if (index === this._driverCoordinates.length - 1) {
           this._updateRideStatus(true);
+          this._allowUserInfoButton = true;
         }
       }, 100 * index);
     });
