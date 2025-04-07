@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../auth.service";
-import {Router} from "@angular/router";
-import {lastValueFrom} from "rxjs";
-import {HttpErrorResponse} from "@angular/common/http";
+import { AuthService } from "../auth.service";
+import { Router } from "@angular/router";
+import { lastValueFrom } from "rxjs";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: 'app-login',

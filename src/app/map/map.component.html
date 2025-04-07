@@ -1,5 +1,6 @@
 <div id="dashboard">
-  <span class="user-icon" (click)="_navigateUserInfo()">👤</span>
+  <span class="user-icon" (click)="_navigateUserInfo()" *ngIf="_allowUserInfoButton">👤</span>
+  <h1 class="app-title">Ride Simulation</h1>
 
   <!-- Container Map -->
   <div class="map-container">
