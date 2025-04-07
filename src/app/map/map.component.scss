@@ -19,6 +19,7 @@
   height: 100vh;
   gap: 20px;
   padding: 20px;
+  position: relative;
 }
 
 #dashboard > button {
@@ -100,4 +101,13 @@ button:hover {
     width: 100%;
     max-width: 500px;
   }
+}
+
+.user-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 1000;
 }
