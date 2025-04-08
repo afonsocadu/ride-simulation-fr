@@ -4,13 +4,6 @@
   padding: 0;
 }
 
-.app-title {
-  font-size: 32px;
-  font-weight: bold;
-  color: #2c3e50;
-  margin-bottom: 20px;
-}
-
 #dashboard {
   display: flex;
   flex-direction: column;
@@ -19,6 +12,10 @@
   height: 100vh;
   gap: 20px;
   padding: 20px;
+}
+
+.app-title {
+  margin-bottom: 56px;
 }
 
 .map-container {
