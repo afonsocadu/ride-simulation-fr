@@ -1,1 +1,92 @@
-/* You can add global styles to this file, and also import other style files */
+
+:root {
+  /* Main Colors */
+  --primary-color: #8E44AD;
+  --secondary-color: #9B59B6;
+  --color-background: #0D1117;
+
+  //Light Colors
+  --light-color: #F0F6FC;
+  --light-color-2: #ECF1F4;
+
+  /* Grey Colors */
+  --color-grey-darker: #6F7072;
+  --color-grey-darker-30-opacity: #6F707230;
+  --color-bluish-grey: #687379;
+  --color-bluish-grey-75-opacity: #68737975;
+
+  // Greens
+  --dt-green: #86BC25;
+  --dt-green-4: #43B02A;
+  --dt-green-6: #046A38;
+  --dt-green-7: #2C5234;
+
+  // Other Colors
+  --color-secondary: #EC6A5E;
+  --dt-yellow: #FFCD00;
+  --dt-orange: #ED8B00;
+  --dt-red: #DA291C;
+  --dt-accessible-teal: #0D8390;
+}
+
+* {
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background);
+}
+
+.app-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 36px;
+}
+
+h2 {
+  text-align: center;
+  color: var(--light-color);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+//Buttons
+.button-pattern {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.button-pattern:hover {
+  background-color: var(--secondary-color);
+}
+
+
+.back-icon {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1000;
+  background-color: var(--primary-color);
+  padding: 6px;
+  border-radius: 50%;
+  color: white;
+  transition: transform 0.3s ease;
+}

@@ -2,13 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-.app-title {
-  font-size: 32px;
-  font-weight: bold;
-  color: #2c3e50;
-  margin-bottom: 20px;
+  background-color: var(--color-background);
 }
 
 #dashboard {
@@ -19,6 +13,23 @@
   height: 100vh;
   gap: 20px;
   padding: 20px;
+}
+
+.app-title {
+  margin-bottom: 56px;
+}
+
+.button-pattern {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .map-container {
@@ -53,21 +64,19 @@
 
 input[type="text"],
 button {
-  padding: 12px;
   width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #d0e1e7;
+  border-radius: 8px;
   box-sizing: border-box;
-  border: 1px solid #bdc3c7;
-  border-radius: 4px;
-  font-size: 16px;
+  background-color: var(--bluish-grey);
+  color: var(--light-color);
 }
 
+input[type="text"],
 button {
-  background-color: #3498db;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #2980b9;
+  border-color: var(---color-grey-darker-30-opacity);
+  outline: none;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
 }

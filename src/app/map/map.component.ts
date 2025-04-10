@@ -70,6 +70,10 @@ export class MapComponent implements OnInit {
     this._router.navigate(['/user-info']);
   }
 
+  protected _backToPreviousPage() {
+    this._router.navigate(['/location-input']);
+  }
+
   private _setupRoutingControl(mockDriverLat: number, mockDriverLng: number): void {
     this._routingControl = L.Routing.control({
       waypoints: [
