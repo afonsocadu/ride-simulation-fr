@@ -1,4 +1,6 @@
 <body>
+<h1 class="app-title">Ride Simulation</h1>
+
 <div class="main">
   <h2>Login</h2>
   <form (ngSubmit)="onSubmit()">
@@ -20,7 +22,7 @@
   </form>
 </div>
 <div class="other-options">
-  <button type="button" class="button-recruiter" (click)="_logInRecruiter()">Log in as a recruiter</button>
+  <button type="button" class="button-pattern" (click)="_logInRecruiter()">Log in as a recruiter</button>
   <button type="button" class="button-pattern" (click)="_toggleForm()">{{ _isCreatingUser ? 'Switch to login' : 'Create Account' }}</button>
 </div>
 </body>

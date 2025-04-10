@@ -1,14 +1,14 @@
 <div id="dashboard">
+  <i class="fas fa-arrow-left arrow-icon back-icon" (click)="_backToPreviousPage()"></i>
   <i class="fas fa-user user-icon" (click)="_navigateUserInfo()" *ngIf="_allowUserInfoButton"></i>
 
-  <h1 class="app-title">Ride Simulation</h1>
 
   <!-- Container Map -->
   <div class="map-container">
     <div id="map" class="map-frame"></div>
   </div>
 
-  <button *ngIf="_allowButtonRequestDriver" (click)="_requestDriver()">Request a driver</button>
-  <button *ngIf="_driverisMoving" (click)="_cancelRide()">Cancel ride</button>
+  <button *ngIf="_allowButtonRequestDriver" class="button-pattern"  (click)="_requestDriver()">Request a driver</button>
+  <button *ngIf="_driverisMoving" class="button-pattern" (click)="_cancelRide()">Cancel ride</button>
 </div>
 

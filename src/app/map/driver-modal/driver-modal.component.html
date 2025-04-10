@@ -1,5 +1,5 @@
 <div class="modal-container">
-  <h2 class="modal-title">Driver details</h2>
+  <h1 class="modal-title">Driver details</h1>
 
   <div class="modal-content">
     <p><strong>Estimated Price:</strong> {{ _price | currency:'EUR' }}</p>
@@ -7,8 +7,8 @@
     <p><strong>Distance from destination:</strong> {{ _totalDistance }} km</p>
   </div>
 
-  <div>
-    <button (click)="closeModal(true)">Confirm driver</button>
-    <button (click)="closeModal(false)">Cancel Ride</button>
+  <div class="buttons">
+    <button class="button-pattern" (click)="closeModal(true)">Confirm driver</button>
+    <button class="button-pattern" (click)="closeModal(false)">Cancel Ride</button>
   </div>
 </div>
