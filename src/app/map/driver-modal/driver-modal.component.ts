@@ -31,7 +31,7 @@ export class DriverModalComponent implements OnInit {
   private _calculateFare(): number {
     const baseFare = 5;
     const costPerKm = 1.5;
-    const distanceInKm = this._totalDistance / 1000;
+    const distanceInKm = this._totalDistance;
 
     return baseFare + distanceInKm * costPerKm;
   }
