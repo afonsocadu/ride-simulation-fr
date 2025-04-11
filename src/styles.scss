@@ -1,9 +1,9 @@
 
 :root {
   /* Main Colors */
-  --primary-color: #8E44AD;
-  --secondary-color: #9B59B6;
-  --color-background: #0D1117;
+  --primary-color: #7F00FF;
+  --secondary-color: #00C3FF;
+  --color-background: #1C1C28;
 
   //Light Colors
   --light-color: #F0F6FC;
@@ -64,7 +64,7 @@ h2 {
   background-color: var(--primary-color);
   color: var(--light-color);
   border: none;
-  border-radius: 8px;
+  border-radius: 16px;
   cursor: pointer;
   font-size: 16px;
   margin-bottom: 16px;
