@@ -4,6 +4,12 @@ Web application for user signup/login and ride‑hailing simulation.
 
 ---
 
+## Demo Video
+
+Watch the [demo video](https://www.youtube.com/shorts/YAybenB7RCQ) to see the Ride Simulation in action.
+
+---
+
 ## Features
 
 - User signup & login with email/password validation
@@ -34,6 +40,7 @@ cd ride-simulation-fr
 npm install
 ng serve 
 ```
+---
 
 ## Tech Stack
 
@@ -41,6 +48,11 @@ ng serve
 - **Leaflet**, **leaflet-routing-machine**, **leaflet-control-geocoder**
 - **Axios**, **RxJS**
 
+  ---
+
+## Ride Simulation API
+
+For the backend API, check out the [Ride Simulation API repository](https://github.com/afonsocadu/ride-simulation-api).
 
 
 
