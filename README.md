@@ -1,27 +1,46 @@
-# RideSimulationFr
+# Ride Simulation Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.0.
+Web application for user signup/login and ride‑hailing simulation.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+- User signup & login with email/password validation
+- Location input: specify pickup and drop‑off points
+- Ride simulation: estimated distance & fare
+- Request a driver and track ride status:  
+  “Request Driver”, “Driver in Route”, “In Transit”, “Arrived”
+- Interactive map (Leaflet + Routing Machine) with user & driver markers
+- Ride history: total number of completed rides
+- User profile page: email and ride count
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## Prerequisites
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Node.js ≥ 16.x
+- npm ≥ 8.x
+- Angular CLI ~14.0.0
 
-## Running unit tests
+```bash
+npm install -g @angular/cli@14
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Installation & Local Execution
+```bash
+git clone https://github.com/afonsocadu/ride-simulation-fr
+cd ride-simulation-fr
+npm install
+ng serve 
+```
 
-## Running end-to-end tests
+## Tech Stack
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- **Angular 14**, **Angular Material**, **SCSS**
+- **Leaflet**, **leaflet-routing-machine**, **leaflet-control-geocoder**
+- **Axios**, **RxJS**
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
