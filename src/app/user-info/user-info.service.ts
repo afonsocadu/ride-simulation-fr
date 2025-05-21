@@ -5,7 +5,7 @@ import { RideDetails } from './user-info-config';
   providedIn: 'root'
 })
 export class UserInfoService {
-  private url:string = 'http://localhost:3000';
+  private url:string = 'environment.apiUrl';
 
   constructor(private http: HttpClient) {}
 
