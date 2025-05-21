@@ -4,6 +4,12 @@ Web application for user signup/login and ride‑hailing simulation.
 
 ---
 
+## Access the Production Version
+
+To try out the application in a live production environment, visit the deployed frontend [here](https://ride-simulation-fr.onrender.com)
+
+---
+
 ## Demo Video
 
 Watch the [demo video](https://www.youtube.com/shorts/YAybenB7RCQ) to see the Ride Simulation in action.
