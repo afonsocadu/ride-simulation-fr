@@ -42,6 +42,6 @@ export class DriverModalComponent implements OnInit {
       return;
     }
 
-    this._totalDistance = totalDistance / 1000;
+    this._totalDistance = Number((totalDistance / 1000).toFixed(2));
   }
 }
