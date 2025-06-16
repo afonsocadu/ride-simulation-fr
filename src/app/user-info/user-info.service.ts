@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RideDetails } from './user-info-config';
+import {environment} from "../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
 export class UserInfoService {
-  private url:string = 'environment.apiUrl';
+  private url:string = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
